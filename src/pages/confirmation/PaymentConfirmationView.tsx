@@ -15,7 +15,8 @@ export default function PaymentConfirmationView() {
   const [clientSecret, setClientSecret] = useState("");
 
   useEffect(() => {
-    const publishableKey = "pk_test_hnNdXEiRdGcV3AfTEuXFxPZu";
+    const publishableKey = "pk_test_51HblAIDyXaxS1z9NqOFDsRQtpisR0O1ECxqY10W91K6V1bKah7qisIke7NBrJiv6df0CaYcPqH8W2oQc5deXih6G00VYUeuscq";
+
     setStripePromise(loadStripe(publishableKey));
   }, []);
 
@@ -24,10 +25,14 @@ export default function PaymentConfirmationView() {
   }, []);
 
   const createPaymentIntent = () => {
-    fetch("http://127.0.0.1:8888/admin/payments/create-payment-intent", {
+    // fetch("http://localhost:8888/admin/payments/create-payment-intent", {
+    fetch("http://api-2.myfamigo.com:8080/payment-service/admin/payments/create-payment-intent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIwYjYyNDEwNy1kZTk1LTExZWQtYmQ1MS0wMmZmNDkyMjZkOTQiLCJleHAiOjE3MDUzNzU3NzJ9.CjdOenHFy-AjMXf99Ei7_nfS_lW8t1DQWDadNpGGFAc",
+        "Access-Control-Allow-Origin": "*",
+        "Allow-Control-Allow-Credentials": "true",
       },
       body: JSON.stringify({
         currency: "HKD",
@@ -52,15 +57,15 @@ export default function PaymentConfirmationView() {
           stripe={stripePromise}
           options={{
             clientSecret,
-            locale: "zh-HK",
-            appearance: {
-                theme: "stripe",
-                          variables: {
-                borderRadius: "0",
-                colorPrimary: "#231B55",
-                focusOutline: "none",
-              },
-            }
+            // locale: "zh-HK",
+            // appearance: {
+            //     theme: "stripe",
+            //               variables: {
+            //     borderRadius: "0",
+            //     colorPrimary: "#231B55",
+            //     focusOutline: "none",
+            //   },
+            // }
             // appearance: {
             //   theme: "stripe",
             //   variables: {
